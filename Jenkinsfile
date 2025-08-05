@@ -46,7 +46,7 @@ pipeline {
                     --format HTML \
                     --out dependency-report.html \
                     --data ${WORKSPACE}/dc-data \
-                    --disableUpdateCheck
+                     --noupdate
                 '''
             }
         }
