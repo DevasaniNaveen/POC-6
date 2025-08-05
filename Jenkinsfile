@@ -37,6 +37,9 @@ pipeline {
         }
 
         stage('Dependency Check') {
+            environment {
+                NVD_API_KEY = credentials('NVD_API_KEY') // Replace with your actual Jenkins secret ID
+            }
             steps {
                 sh '''
                     /opt/dependency-check/bin/dependency-check.sh \
@@ -46,6 +49,7 @@ pipeline {
                     --out dependency-report.html \
                     --data $WORKSPACE/dc-data \
                     --nvdApiKey $NVD_API_KEY
+                    --nvdApiDelay 3000
                 '''
             }
         }
