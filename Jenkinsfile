@@ -3,14 +3,14 @@ pipeline {
 
     tools {
         maven 'Maven3'   
-        jdk 'Java17'       
+        jdk 'Java17'     
     }
 
     stages {
         stage('Checkout Code') {
             steps {
                 sh 'echo passed'
-                //git branch: 'main', url: 'https://github.com/YOUR_USERNAME/YOUR_REPO.git'
+                // git branch: 'main', url: 'https://github.com/YOUR_USERNAME/YOUR_REPO.git'
             }
         }
 
@@ -20,12 +20,18 @@ pipeline {
             }
         }
 
-        stage('SonarQube Analysis') {
+        stage('Static Code Analysis') {
+            environment {
+                SONAR_URL = "http://34.207.249.160:9000"
+            }
             steps {
-                withSonarQubeEnv('MySonarQube') {
-                    withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                        sh 'mvn sonar:sonar -Dsonar.token=$SONAR_TOKEN'
-                    }
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_AUTH_TOKEN')]) {
+                    sh '''
+                        mvn sonar:sonar \
+                        -Dsonar.projectKey=MyProject \
+                        -Dsonar.host.url=$SONAR_URL \
+                        -Dsonar.login=$SONAR_AUTH_TOKEN
+                    '''
                 }
             }
         }
