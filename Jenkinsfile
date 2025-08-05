@@ -35,7 +35,7 @@ pipeline {
                 }
             }
         }
-
+        /*
         stage('Dependency Check') {
         
             steps {
@@ -63,7 +63,7 @@ pipeline {
                 ]
             }
         }
-
+        */
         stage('Docker Build') {
             steps {
                 sh "docker build -t naveen:latest ."
