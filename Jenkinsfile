@@ -45,7 +45,7 @@ pipeline {
                     --format HTML \
                     --out dependency-report.html \
                     --data $WORKSPACE/dc-data \
-                    --disableUpdate
+                    --nvdApiKey $NVD_API_KEY
                 '''
             }
         }
