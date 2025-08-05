@@ -45,7 +45,7 @@ pipeline {
                     --scan . \
                     --format HTML \
                     --out dependency-report.html \
-                    --data /var/lib/jenkins/workspace/POC-6/dc-data \
+                    --data ${WORKSPACE}/dc-data \
                     --disableUpdateCheck
                 '''
             }
