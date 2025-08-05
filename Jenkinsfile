@@ -1,9 +1,6 @@
 pipeline {
     agent any
-    environment {
-        NVD_API_KEY = credentials('NVD_API_KEY') 
-    }
-
+   
     tools {
         maven 'Maven3'   
         jdk 'Java17'     
