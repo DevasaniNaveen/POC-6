@@ -66,6 +66,24 @@ pipeline {
         */
         stage('Docker Build') {
             steps {
+                // Stop and remove container using port 8082, if any
+                    sh '''
+                        CONTAINER_ID=$(docker ps -q --filter "publish=8082")
+                        if [ ! -z "$CONTAINER_ID" ]; then
+                            echo "Stopping existing container on port 8082: $CONTAINER_ID"
+                            docker stop $CONTAINER_ID
+                            docker rm $CONTAINER_ID
+                        fi
+
+                        # Remove old image if exists
+                        IMAGE_ID=$(docker images -q naveen:latest)
+                        if [ ! -z "$IMAGE_ID" ]; then
+                            echo "Removing old image: $IMAGE_ID"
+                            docker rmi -f $IMAGE_ID
+                        fi
+                    '''
+
+                    // Build fresh image
                 sh "docker build -t naveen:latest ."
             }
         }
