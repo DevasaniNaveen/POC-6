@@ -81,10 +81,5 @@ pipeline {
                 sh 'docker run -d -p 8082:8080 naveen:latest'
             }
         }
-        stage('Run') {
-            steps {
-                sh 'java -cp target/myapp.jar com.example.App'
-            }
-        }
     }
 }
