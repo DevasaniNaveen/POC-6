@@ -72,7 +72,7 @@ pipeline {
 
         stage('Trivy Scan') {
             steps {
-                sh "trivy image --scanners vuln --skip-db-update --cache-dir /var/lib/jenkins/.trivy-cache --severity HIGH,CRITICAL naveen:latest"
+                sh "trivy image --scanners vuln  --cache-dir /var/lib/jenkins/.trivy-cache --severity HIGH,CRITICAL naveen:latest"
             }
         }
 
