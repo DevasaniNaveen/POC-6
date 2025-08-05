@@ -78,7 +78,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh 'docker run -d -p 8082:8080 naveen:latest'
+                sh 'docker run -d -p 8082:3000 naveen:latest'
             }
         }
     }
